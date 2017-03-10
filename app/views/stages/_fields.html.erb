@@ -70,3 +70,31 @@
   <%= form.input :update_github_pull_requests, as: :check_box, label: "Update Pull Requests after deployment" %>
   <%= form.input :use_github_deployment_api, as: :check_box, label: "Use GitHub Deployment API" %>
 </fieldset>
+
+<script>
+  $(function(){
+    $("fieldset").each(function(i, fieldset){
+      var fieldset = $(fieldset);
+      var direct_children = fieldset.find('> *').not('legend');
+
+      var filled = fieldset.find(':input').filter(function(i, el){
+        if(el.type == "checkbox" || el.type == "radio") {
+          return $(el).is(':checked');
+        } else if(el.type == "hidden") {
+          return false;
+        } else {
+          return $(el).val() != "";
+        }
+      });
+
+      if(filled.size() == 0) {
+        var legend = fieldset.find('legend');
+        legend.click(function(){ direct_children.show() }).css('cursor', 'pointer');
+
+        legend.append(' &nabla;');
+
+        direct_children.hide();
+      }
+    });
+  });
+</script>
