@@ -93,8 +93,9 @@ class JobExecution
     }.merge(env)
 
     commands = env.map do |key, value|
-      "export #{key}=#{value.shellescape}"
+      "export #{key}=#{value.shellescape}" if value.present?
     end
+    .compact
 
     ["cd #{dir}"].concat commands
   end
@@ -217,7 +218,11 @@ class JobExecution
       DEPLOYER_NAME: @job.user.name,
       REFERENCE: @reference,
       REVISION: @job.commit,
-      TAG: (@job.tag || @job.commit)
+      TAG: (@job.tag || @job.commit),
+      BUNDLE_GITHUB__COM: ENV['BUNDLE_GITHUB__COM'],
+      SSH_AUTH_SOCK: ENV['SSH_AUTH_SOCK'],
+      GIT_HTTP_USERNAME: ENV['GIT_HTTP_USERNAME'],
+      GIT_HTTP_PASSWORD: ENV['GIT_HTTP_PASSWORD'],
     }.merge(@env)
 
     env.merge!(Hash[*Samson::Hooks.fire(:job_additional_vars, @job)])

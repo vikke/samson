@@ -32,7 +32,7 @@ Otherwise when creating a new project you may get the error "<Repository URL> is
 
 ## Database
 
-For very small deployments, SQLite is sufficient, however you may want to leverage MySQL or PostgreSQL. 
+For very small deployments, SQLite is sufficient, however you may want to leverage MySQL or PostgreSQL.
 Set up a production block in database.yml with the settings to connect to your DB then run `RAILS_ENV=production bundle exec rake db:setup`
 
 ## Webserver
@@ -91,7 +91,7 @@ Set the following variables in your `.env` file or set them as environment varia
     <tr>
       <td>GITHUB_ORGANIZATION<BR>GITHUB_ADMIN_TEAM<BR>GITHUB_DEPLOY_TEAM</td>
       <td></td>
-      <td>Samson can use an organisation's teams to provide default roles to users authenticating with GitHub. 
+      <td>Samson can use an organisation's teams to provide default roles to users authenticating with GitHub.
         <ul>
           <li>GITHUB_ORGANIZATION is the name of the organisation to read teams from, e.g. zendesk</li>
           <li>Setting GITHUB_ADMIN_TEAM will allow any users part of the that team within the GITHUB_ORGANIZATION organization to have 'ADMINISTRATOR' permissions.</li>
@@ -133,6 +133,13 @@ Set the following variables in your `.env` file or set them as environment varia
       <td></td>
       <td>You may fill in using the instructions below if you would like a dynamic chart of response time and throughput during deploys.
           https://docs.newrelic.com/docs/features/getting-started-with-the-new-relic-rest-api#setup</td>
+    </tr>
+    <tr>
+      <td>BUNDLE_GITHUB__COM</td>
+      <td> </td>
+      <td>If you use private github repositories with bundler, you should set this value.
+        http://bundler.io/man/bundle-config.1.html#CREDENTIALS-FOR-GEM-SOURCES
+      </td>
     </tr>
   </tbody>
 </table>

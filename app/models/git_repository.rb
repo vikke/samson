@@ -160,7 +160,7 @@ class GitRepository
     Dir.chdir(dir) do
       success, output = Samson::CommandExecutor.execute(
         *command,
-        whitelist_env: ['HOME', 'PATH'],
+        whitelist_env: ['HOME', 'PATH', 'SSH_AUTH_SOCK', 'GIT_HTTP_USERNAME', 'GIT_HTTP_PASSWORD'],
         timeout: 30.minutes,
         err: '/dev/null'
       )
